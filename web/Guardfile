@@ -1,0 +1,14 @@
+guard :haml, input: "src", output: "public" do
+  watch %r{^src\/\w+(\.haml)$}
+end
+
+guard :sass, input: "src/stylesheets", output: "public/stylesheets"
+
+coffeescript_options = {
+  input: "src/javascripts",
+  output: "public/javascripts",
+  patterns: [%r{^src\/javascripts\/\w+(\.coffee)$}]
+}
+guard :coffeescript, coffeescript_options do
+  coffeescript_options[:patterns].each { |pattern| watch(pattern) }
+end
